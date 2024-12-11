@@ -20,7 +20,7 @@ export default async function (c: Context) {
   }
 
   const multipartUpload = c.env.R2_BUCKET.resumeMultipartUpload(
-    key,
+    c.req.header('x-api-key')?.split("#")[1] + "/" + key,
     uploadId
   )
 

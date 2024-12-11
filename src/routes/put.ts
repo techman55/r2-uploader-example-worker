@@ -9,7 +9,7 @@ export default async function (c: Context) {
     return c.text('file name is required', 400)
   }
 
-  await bucket.put(key, file, {
+  await bucket.put(c.req.header('x-api-key')?.split("#")[1] + "/" + key, file, {
     httpMetadata: {
       contentType: file.type
     }

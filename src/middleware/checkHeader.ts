@@ -5,7 +5,7 @@ function validHeader (c: Context) {
     return c.text('AUTH_KEY_SECRET is not set', 403)
   }
 
-  const useKey = c.req.header('x-api-key') === c.env.AUTH_KEY_SECRET
+  const useKey = c.req.header('x-api-key')?.split("#")[0] === c.env.AUTH_KEY_SECRET
 
   if (c.req.method === 'GET') {
     if (c.env.PRIVATE_BUCKET) {

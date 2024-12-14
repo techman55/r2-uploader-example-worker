@@ -2,7 +2,7 @@
   "name": "r2-uploader-example-worker",
   "scripts": {
     "dev": "wrangler dev src/index.ts --port 4897",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy src/index.ts"
   },
   "dependencies": {
     "hono": "^4.6.12"

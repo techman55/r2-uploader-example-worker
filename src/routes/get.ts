@@ -3,7 +3,13 @@ import {Context} from "hono"
 export default async function (c: Context) {
   const key = c.req.param('key')
 
-  const object = await c.env.R2_BUCKET.get(c.req.header('x-api-key')?.split("#")[1] + "/" + key)
+  let object;
+  if (c.req.header('x-api-key')) {
+    object = await c.env.R2_BUCKET.get(c.req.header('x-api-key')?.split("#")[1] + "/" + key)
+  } else {
+    object =await c.env.R2_BUCKET.get(key)
+  }
+  
 
   if (object === null) {
     return new Response('Object Not Found', {status: 404})
